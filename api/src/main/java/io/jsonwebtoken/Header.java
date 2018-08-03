@@ -109,7 +109,16 @@ public interface Header<T extends Header<T>> extends Map<String,Object> {
     T setContentType(String cty);
 
     /**
-     * Returns the JWT <code>zip</code> (Compression Algorithm) header value or {@code null} if not present.
+     * Returns the JWT  <a href="https://tools.ietf.org/html/rfc7516#section-4.1.3"><code>zip</code></a>
+     * (Compression Algorithm) header parameter value or {@code null} if not present.
+     *
+     * <h3>Compatiblity Note</h3>
+     *
+     * <p>While the JWT family of specifications only defines the <code>zip</code> header in the JWE
+     * (JSON Web Encryption) specification, JJWT will also support compression for JWS as well if you choose to use it.
+     * However, be aware that <b>if you use compression when creating a JWS token, other libraries may not be able to
+     * parse the JWS</b>. However, compression when creating JWE tokens should be universally accepted for any library
+     * that supports JWE.</p>
      *
      * @return the {@code zip} header parameter value or {@code null} if not present.
      * @since 0.6.0
@@ -117,14 +126,24 @@ public interface Header<T extends Header<T>> extends Map<String,Object> {
     String getCompressionAlgorithm();
 
     /**
-     * Sets the JWT <code>zip</code> (Compression Algorithm) header parameter value. A {@code null} value will remove
+     * Sets the JWT  <a href="https://tools.ietf.org/html/rfc7516#section-4.1.3"><code>zip</code></a>
+     * (Compression Algorithm) header parameter value. A {@code null} value will remove
      * the property from the JSON map.
      * <p>
      * <p>The compression algorithm is NOT part of the <a href="https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-25">JWT specification</a>
      * and must be used carefully since, is not expected that other libraries (including previous versions of this one)
      * be able to deserialize a compressed JTW body correctly. </p>
      *
-     * @param zip the JWT compression algorithm {@code zip} value or {@code null} to remove the property from the JSON map.
+     * <h3>Compatiblity Note</h3>
+     *
+     * <p>While the JWT family of specifications only defines the <code>zip</code> header in the JWE
+     * (JSON Web Encryption) specification, JJWT will also support compression for JWS as well if you choose to use it.
+     * However, be aware that <b>if you use compression when creating a JWS token, other libraries may not be able to
+     * parse the JWS</b>. However, Compression when creating JWE tokens should be universally accepted for any library
+     * that supports JWE.</p>
+     *
+     * @param zip the JWT compression algorithm {@code zip} value or {@code null} to remove the property from the
+     *  JSON map.
      * @since 0.6.0
      */
     T setCompressionAlgorithm(String zip);

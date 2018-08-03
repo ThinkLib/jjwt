@@ -203,7 +203,6 @@ class JwtsTest {
     @Test
     void testWithInvalidCompressionAlgorithm() {
         try {
-
             Jwts.builder().setHeaderParam(Header.COMPRESSION_ALGORITHM, "CUSTOM").setId("andId").compact()
         } catch (CompressionException e) {
             assertEquals "Unsupported compression algorithm 'CUSTOM'", e.getMessage()
